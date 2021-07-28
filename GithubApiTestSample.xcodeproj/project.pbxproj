@@ -45,6 +45,7 @@
 		A81D49CF26B223F200122C4B /* GithubApiTestSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubApiTestSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A81D49D326B223F200122C4B /* GithubApiTestSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubApiTestSampleUITests.swift; sourceTree = "<group>"; };
 		A81D49D526B223F200122C4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A81D49E126B2252700122C4B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		A81D49AA26B223F100122C4B = {
 			isa = PBXGroup;
 			children = (
+				A81D49E126B2252700122C4B /* README.md */,
 				A81D49B526B223F100122C4B /* GithubApiTestSample */,
 				A81D49C726B223F200122C4B /* GithubApiTestSampleTests */,
 				A81D49D226B223F200122C4B /* GithubApiTestSampleUITests */,
