@@ -31,7 +31,8 @@ class GithubApiTestSampleTests: XCTestCase {
             return
         }
         
-        
+        XCTAssertTrue(false, "can not decode data")
+        XCTAssertTrue(false, "invalid total count")
         
     }
 
