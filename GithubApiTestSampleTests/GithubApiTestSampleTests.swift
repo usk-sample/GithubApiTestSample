@@ -7,6 +7,9 @@
 
 import XCTest
 
+import Combine
+import OHHTTPStubs
+import OHHTTPStubsSwift
 import ViewInspector
 
 @testable import GithubApiTestSample
@@ -14,6 +17,7 @@ import ViewInspector
 class GithubApiTestSampleTests: XCTestCase {
 
     private lazy var testBundle = Bundle.init(for: type(of: self))
+    private var cancellations = Set<AnyCancellable>()
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -50,9 +54,41 @@ class GithubApiTestSampleTests: XCTestCase {
     
     func testStubApi() throws {
         
-        XCTContext.runActivity(named: "status 200") { _ in
-            XCTAssertTrue(false, "must be successed response")
+        let apiClient = ApiClient()
+        
+        stub(condition: isHost("api.github.com") && isPath("/search/repositories")) { _ in
+            let path = OHPathForFile("search_repositories.json", type(of: self))!
+            return HTTPStubsResponse.init(fileAtPath: path,
+                                          statusCode: 200,
+                                          headers: ["Content-Type":"application/json"])
+        }
+        
+        XCTContext.runActivity(named: "status 200") { activity in
+            
+            let expectation = expectation(description: activity.name)
+            
+            apiClient.searchRepositories(query: "apple")
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        debugPrint("finished")
+                    case .failure(let error):
+                        debugPrint(error)
+                    }
+                    
+                    XCTAssertTrue(completion == .finished, "must be finished response")
+                    
+                    expectation.fulfill()
+                } receiveValue: { received in
+                    debugPrint(received.response)
+                    debugPrint(String.init(data: received.data, encoding: .utf8) ?? "null")
+                }.store(in: &cancellations)
+
+            
+            wait(for: [expectation], timeout: 5)
+            
             XCTAssertFalse(true, "must be failed with invalid response")
+            
         }
         
         XCTContext.runActivity(named: "400 status") { _ in

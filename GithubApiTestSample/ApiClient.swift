@@ -15,7 +15,7 @@ class ApiClient {
     
     private let session: URLSession
     
-    private let baseUrl: String = "https://api.github.com/"
+    private let baseUrl: String = "https://api.github.com"
     
     init(session: URLSession = .shared) {
         self.session = session
@@ -25,7 +25,7 @@ class ApiClient {
 extension ApiClient: ApiClientProtocol {
     
     func searchRepositories(query: String) -> URLSession.DataTaskPublisher {
-        let url = URL(string: baseUrl + "search/repositories")!
+        let url = URL(string: baseUrl + "/search/repositories")!
         let request = URLRequest(url: url)
         return session.dataTaskPublisher(for: request)
     }
