@@ -31,9 +31,21 @@ class GithubApiTestSampleTests: XCTestCase {
             return
         }
         
-        XCTAssertTrue(false, "can not decode data")
-        XCTAssertTrue(false, "invalid total count")
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
         
+        do {
+            let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+            
+            XCTAssertTrue(response.totalCount == 40, "invalid total count")
+            XCTAssertTrue(response.items.first?.license.key == "mit", "invalid License")
+
+        } catch let error {
+            debugPrint(error)
+            XCTFail(error.localizedDescription)
+        }
+                
     }
 
 //    func testPerformanceExample() throws {

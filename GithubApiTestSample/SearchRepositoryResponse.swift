@@ -23,7 +23,7 @@ struct SearchRepositoryItem: Codable {
     let description: String
     let fork: Bool
     let url: String
-    let cratedAt: Date
+    let createdAt: Date
     let updatedAt: Date
     let homepage: String
     let stargazersCount: Int
