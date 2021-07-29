@@ -47,6 +47,23 @@ class GithubApiTestSampleTests: XCTestCase {
         }
                 
     }
+    
+    func testStubApi() throws {
+        
+        XCTContext.runActivity(named: "status 200") { _ in
+            XCTAssertTrue(false, "must be successed response")
+            XCTAssertFalse(true, "must be failed with invalid response")
+        }
+        
+        XCTContext.runActivity(named: "400 status") { _ in
+            XCTAssertTrue(false, "must be error")
+        }
+        
+        XCTContext.runActivity(named: "500 status") { _ in
+            XCTAssertTrue(false, "must be error")
+        }
+        
+    }
 
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
