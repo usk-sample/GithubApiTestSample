@@ -7,8 +7,10 @@
 
 import Foundation
 
+import Combine
+
 protocol ApiClientProtocol: AnyObject {
-    func searchRepositories(query: String) -> URLSession.DataTaskPublisher
+    func searchRepositories(query: String) -> AnyPublisher<SearchRepositoryResponse, Error>
 }
 
 class ApiClient {
@@ -24,9 +26,28 @@ class ApiClient {
 
 extension ApiClient: ApiClientProtocol {
     
-    func searchRepositories(query: String) -> URLSession.DataTaskPublisher {
+    func searchRepositories(query: String) -> AnyPublisher<SearchRepositoryResponse, Error> {
         let url = URL(string: baseUrl + "/search/repositories")!
         let request = URLRequest(url: url)
-        return session.dataTaskPublisher(for: request)
+        return session
+            .dataTaskPublisher(for: request)
+            .validateNetwork()
+            .decode(type: SearchRepositoryResponse.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+}
+
+extension URLSession.DataTaskPublisher {
+    
+    public func validateNetwork() -> Publishers.TryMap<Self, Data> {
+        
+        return tryMap() { element -> Data in
+            guard let httpResponse = element.response as? HTTPURLResponse,
+                httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+            return element.data
+        }
+        
     }
 }
