@@ -16,11 +16,13 @@ protocol ApiClientProtocol: AnyObject {
 class ApiClient {
     
     private let session: URLSession
+    private let decoder: JSONDecoder
     
     private let baseUrl: String = "https://api.github.com"
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared, decoder: JSONDecoder = .default) {
         self.session = session
+        self.decoder = decoder
     }
 }
 
@@ -32,7 +34,7 @@ extension ApiClient: ApiClientProtocol {
         return session
             .dataTaskPublisher(for: request)
             .validateNetwork()
-            .decode(type: SearchRepositoryResponse.self, decoder: JSONDecoder())
+            .decode(type: SearchRepositoryResponse.self, decoder: self.decoder)
             .eraseToAnyPublisher()
     }
 }
@@ -50,4 +52,13 @@ extension URLSession.DataTaskPublisher {
         }
         
     }
+}
+
+extension JSONDecoder {
+    static var `default`: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
 }

@@ -70,18 +70,20 @@ class GithubApiTestSampleTests: XCTestCase {
             apiClient.searchRepositories(query: "apple")
                 .sink { completion in
                     switch completion {
+
                     case .finished:
                         debugPrint("finished")
+                        XCTAssertTrue(true, "must be finished response")
+
                     case .failure(let error):
                         debugPrint(error)
+                        XCTFail(error.localizedDescription)
                     }
                     
-                    XCTAssertTrue(completion == .finished, "must be finished response")
-                    
                     expectation.fulfill()
+                    
                 } receiveValue: { received in
-                    debugPrint(received.response)
-                    debugPrint(String.init(data: received.data, encoding: .utf8) ?? "null")
+                    debugPrint(received)
                 }.store(in: &cancellations)
 
             
