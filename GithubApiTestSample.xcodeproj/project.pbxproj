@@ -14,6 +14,8 @@
 		A81D49C926B223F200122C4B /* GithubApiTestSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49C826B223F200122C4B /* GithubApiTestSampleTests.swift */; };
 		A81D49D426B223F200122C4B /* GithubApiTestSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49D326B223F200122C4B /* GithubApiTestSampleUITests.swift */; };
 		A81D49E726B225BF00122C4B /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = A81D49E626B225BF00122C4B /* ViewInspector */; };
+		A81D49E926B228CC00122C4B /* SearchRepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */; };
+		A81D49EC26B22BBD00122C4B /* search_repositories.json in Resources */ = {isa = PBXBuildFile; fileRef = A81D49EB26B22BBD00122C4B /* search_repositories.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		A81D49D326B223F200122C4B /* GithubApiTestSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubApiTestSampleUITests.swift; sourceTree = "<group>"; };
 		A81D49D526B223F200122C4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A81D49E126B2252700122C4B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
+		A81D49EB26B22BBD00122C4B /* search_repositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_repositories.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			children = (
 				A81D49B626B223F100122C4B /* GithubApiTestSampleApp.swift */,
 				A81D49B826B223F100122C4B /* ContentView.swift */,
+				A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */,
 				A81D49BA26B223F200122C4B /* Assets.xcassets */,
 				A81D49BF26B223F200122C4B /* Info.plist */,
 				A81D49BC26B223F200122C4B /* Preview Content */,
@@ -120,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				A81D49C826B223F200122C4B /* GithubApiTestSampleTests.swift */,
+				A81D49EA26B22B9B00122C4B /* Files */,
 				A81D49CA26B223F200122C4B /* Info.plist */,
 			);
 			path = GithubApiTestSampleTests;
@@ -132,6 +138,14 @@
 				A81D49D526B223F200122C4B /* Info.plist */,
 			);
 			path = GithubApiTestSampleUITests;
+			sourceTree = "<group>";
+		};
+		A81D49EA26B22B9B00122C4B /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				A81D49EB26B22BBD00122C4B /* search_repositories.json */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A81D49EC26B22BBD00122C4B /* search_repositories.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A81D49E926B228CC00122C4B /* SearchRepositoryResponse.swift in Sources */,
 				A81D49B926B223F100122C4B /* ContentView.swift in Sources */,
 				A81D49B726B223F100122C4B /* GithubApiTestSampleApp.swift in Sources */,
 			);
