@@ -56,14 +56,14 @@ class GithubApiTestSampleTests: XCTestCase {
         
         let apiClient = ApiClient()
         
-        stub(condition: isHost("api.github.com") && isPath("/search/repositories")) { _ in
-            let path = OHPathForFile("search_repositories.json", type(of: self))!
-            return HTTPStubsResponse.init(fileAtPath: path,
-                                          statusCode: 200,
-                                          headers: ["Content-Type":"application/json"])
-        }
-        
         XCTContext.runActivity(named: "status 200") { activity in
+            
+            stub(condition: isHost("api.github.com") && isPath("/search/repositories")) { _ in
+                let path = OHPathForFile("search_repositories.json", type(of: self))!
+                return HTTPStubsResponse.init(fileAtPath: path,
+                                              statusCode: 200,
+                                              headers: ["Content-Type":"application/json"])
+            }
             
             let expectation = expectation(description: activity.name)
             
@@ -89,16 +89,45 @@ class GithubApiTestSampleTests: XCTestCase {
             
             wait(for: [expectation], timeout: 5)
             
-            XCTAssertFalse(true, "must be failed with invalid response")
+//            XCTAssertFalse(true, "must be failed with invalid response")
             
         }
         
-        XCTContext.runActivity(named: "400 status") { _ in
-            XCTAssertTrue(false, "must be error")
-        }
-        
-        XCTContext.runActivity(named: "500 status") { _ in
-            XCTAssertTrue(false, "must be error")
+        XCTContext.runActivity(named: "400 status") { activity in
+            
+            stub(condition: isHost("api.github.com") && isPath("/search/repositories")) { _ in
+                let path = OHPathForFile("search_repositories.json", type(of: self))!
+                return HTTPStubsResponse.init(fileAtPath: path,
+                                              statusCode: 400,
+                                              headers: ["Content-Type":"application/json"])
+            }
+            
+            let expectation = expectation(description: activity.name)
+            
+            apiClient.searchRepositories(query: "apple")
+                .sink { completion in
+                    switch completion {
+
+                    case .finished:
+                        debugPrint("finished")
+                        XCTFail("must be error")
+
+                    case .failure(let error):
+                        debugPrint("*** error")
+                        debugPrint(error.localizedDescription)
+                        XCTAssertTrue((error as NSError).code == URLError.badServerResponse.rawValue,
+                                      "must be badServerResponse")
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } receiveValue: { received in
+                    debugPrint(received)
+                }.store(in: &cancellations)
+
+            
+            wait(for: [expectation], timeout: 5)
+            
         }
         
     }
