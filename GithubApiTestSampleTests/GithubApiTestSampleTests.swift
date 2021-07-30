@@ -134,9 +134,22 @@ class GithubApiTestSampleTests: XCTestCase {
 
     func testSearchViewModel() throws {
         
-        XCTAssertTrue(false, "正常にデータを取得できること")
-        XCTAssertTrue(false, "正常にエラーを表示できること")                
+        XCTContext.runActivity(named: "success") { activity in
+            let expectation = expectation(description: activity.name)
+            
+            XCTAssertTrue(false, "正常にデータを取得できること")
+            
+            wait(for: [expectation], timeout: 5.0)
+        }
         
+        XCTContext.runActivity(named: "failure") { activity in
+            let expectation = expectation(description: activity.name)
+            
+            XCTAssertTrue(false, "正常にエラーを表示できること")
+
+            wait(for: [expectation], timeout: 5.0)
+        }
+                
     }
     
 //    func testPerformanceExample() throws {

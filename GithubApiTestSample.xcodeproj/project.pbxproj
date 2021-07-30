@@ -19,6 +19,7 @@
 		A81D49EE26B2300D00122C4B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49ED26B2300D00122C4B /* ApiClient.swift */; };
 		A81D49F126B23A6100122C4B /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A81D49F026B23A6100122C4B /* OHHTTPStubsSwift */; };
 		A89D26CD26B3B73F0030C4EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CC26B3B73F0030C4EC /* ViewModel.swift */; };
+		A89D26CF26B3C86F0030C4EC /* StubApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		A81D49EB26B22BBD00122C4B /* search_repositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_repositories.json; sourceTree = "<group>"; };
 		A81D49ED26B2300D00122C4B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		A89D26CC26B3B73F0030C4EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				A81D49C826B223F200122C4B /* GithubApiTestSampleTests.swift */,
+				A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */,
 				A81D49EA26B22B9B00122C4B /* Files */,
 				A81D49CA26B223F200122C4B /* Info.plist */,
 			);
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A81D49C926B223F200122C4B /* GithubApiTestSampleTests.swift in Sources */,
+				A89D26CF26B3C86F0030C4EC /* StubApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
