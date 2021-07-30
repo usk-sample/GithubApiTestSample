@@ -18,6 +18,7 @@
 		A81D49EC26B22BBD00122C4B /* search_repositories.json in Resources */ = {isa = PBXBuildFile; fileRef = A81D49EB26B22BBD00122C4B /* search_repositories.json */; };
 		A81D49EE26B2300D00122C4B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49ED26B2300D00122C4B /* ApiClient.swift */; };
 		A81D49F126B23A6100122C4B /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A81D49F026B23A6100122C4B /* OHHTTPStubsSwift */; };
+		A89D26CD26B3B73F0030C4EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CC26B3B73F0030C4EC /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
 		A81D49EB26B22BBD00122C4B /* search_repositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_repositories.json; sourceTree = "<group>"; };
 		A81D49ED26B2300D00122C4B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		A89D26CC26B3B73F0030C4EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				A81D49B626B223F100122C4B /* GithubApiTestSampleApp.swift */,
 				A81D49B826B223F100122C4B /* ContentView.swift */,
+				A89D26CC26B3B73F0030C4EC /* ViewModel.swift */,
 				A81D49ED26B2300D00122C4B /* ApiClient.swift */,
 				A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */,
 				A81D49BA26B223F200122C4B /* Assets.xcassets */,
@@ -293,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A89D26CD26B3B73F0030C4EC /* ViewModel.swift in Sources */,
 				A81D49E926B228CC00122C4B /* SearchRepositoryResponse.swift in Sources */,
 				A81D49B926B223F100122C4B /* ContentView.swift in Sources */,
 				A81D49B726B223F100122C4B /* GithubApiTestSampleApp.swift in Sources */,

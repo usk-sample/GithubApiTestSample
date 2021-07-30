@@ -132,6 +132,13 @@ class GithubApiTestSampleTests: XCTestCase {
         
     }
 
+    func testSearchViewModel() throws {
+        
+        XCTAssertTrue(false, "正常にデータを取得できること")
+        XCTAssertTrue(false, "正常にエラーを表示できること")                
+        
+    }
+    
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
