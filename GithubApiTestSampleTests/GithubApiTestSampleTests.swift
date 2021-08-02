@@ -134,41 +134,39 @@ class GithubApiTestSampleTests: XCTestCase {
         
         let apiClient = ApiClient()
         
-        XCTContext.runActivity(named: "search apple") { activity in
-            let expectation = expectation(description: activity.name)
-            
-            apiClient.searchRepositories(query: "apple")
-                .sink { completion in
-                    switch completion {
+        measure {
+            XCTContext.runActivity(named: "search apple") { activity in
+                let expectation = expectation(description: activity.name)
+                
+                apiClient.searchRepositories(query: "apple")
+                    .sink { completion in
+                        switch completion {
 
-                    case .finished:
-                        debugPrint("finished")
+                        case .finished:
+                            debugPrint("finished")
 
-                    case .failure(let error):
-                        debugPrint(error)
-                        XCTFail(error.localizedDescription)
-                    }
-                    
-                    expectation.fulfill()
-                    
-                } receiveValue: { received in
-                    debugPrint(received)
-                }.store(in: &cancellations)
-            
-            wait(for: [expectation], timeout: 5.0)
-            
+                        case .failure(let error):
+                            debugPrint(error)
+                            XCTFail(error.localizedDescription)
+                        }
+                        
+                        expectation.fulfill()
+                        
+                    } receiveValue: { received in
+                        debugPrint(received.items.first ?? "null")
+                    }.store(in: &cancellations)
+                
+                wait(for: [expectation], timeout: 5.0)
+                
+            }
         }
+        
     }
     
     /// Test for ViewModel
     func testSearchViewModel() throws {
         
-        guard let url = testBundle.url(forResource: "search_repositories", withExtension: "json"),
-              let data = try? Data.init(contentsOf: url) else {
-            XCTFail("json file not found")
-            return
-        }
-        
+        let data = try getData(fileName: "search_repositories")
         let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
                 
         XCTContext.runActivity(named: "success") { activity in
