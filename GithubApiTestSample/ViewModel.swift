@@ -47,6 +47,7 @@ private extension ViewModel {
         debugPrint("doSearch:\(query)")
         
         apiClient.searchRepositories(query: query)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 self?.loading = false
                 switch completion {
