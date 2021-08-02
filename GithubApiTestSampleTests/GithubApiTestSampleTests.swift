@@ -36,23 +36,12 @@ class GithubApiTestSampleTests: XCTestCase {
     /// Test for Model of Response
     func testModel() throws {
         
-        guard let url = testBundle.url(forResource: "search_repositories", withExtension: "json"),
-              let data = try? Data.init(contentsOf: url) else {
-            XCTFail("json file not found")
-            return
-        }
-                
-        do {
-            let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
-            
-            XCTAssertTrue(response.totalCount == 40, "invalid total count")
-            XCTAssertTrue(response.items.first?.license.key == "mit", "invalid License")
-
-        } catch let error {
-            debugPrint(error)
-            XCTFail(error.localizedDescription)
-        }
-                
+        let data = try getData(fileName: "search_repositories")
+        let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+        
+        XCTAssertTrue(response.totalCount == 40, "invalid total count")
+        XCTAssertTrue(response.items.first?.license.key == "mit", "invalid License")
+                        
     }
     
     /// Test for API using HTTPStubs
@@ -239,4 +228,15 @@ class GithubApiTestSampleTests: XCTestCase {
 //        }
 //    }
 
+}
+
+private extension GithubApiTestSampleTests {
+    
+    func getData(fileName: String, ext: String = "json") throws -> Data {
+        guard let url = testBundle.url(forResource: fileName, withExtension: ext) else {
+            throw NSError.init(domain: "App", code: NSFileNoSuchFileError, userInfo: nil)
+        }
+        return try Data.init(contentsOf: url)
+    }
+    
 }
