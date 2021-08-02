@@ -184,6 +184,23 @@ class GithubApiTestSampleTests: XCTestCase {
                 
     }
     
+    /// Test for View
+    func testView() throws {
+        
+        XCTContext.runActivity(named: "loading") { activity in
+            XCTAssertTrue(false, "must shown loading view")
+        }
+        
+        XCTContext.runActivity(named: "has result") { activity in
+            XCTAssertTrue(false, "must have result")
+        }
+        
+        XCTContext.runActivity(named: "has error") { activity in
+            XCTAssertTrue(false, "must have error")
+        }
+        
+    }
+    
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
 //        self.measure {
