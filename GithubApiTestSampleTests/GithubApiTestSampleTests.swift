@@ -156,7 +156,7 @@ class GithubApiTestSampleTests: XCTestCase {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 debugPrint(viewModel.items)
-                XCTAssertTrue(!viewModel.items.isEmpty, "正常にデータを取得できること")
+                XCTAssertTrue(!viewModel.items.isEmpty, "must have data")
                 expectation.fulfill()
             }
             
@@ -173,7 +173,7 @@ class GithubApiTestSampleTests: XCTestCase {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 debugPrint(viewModel.errorMessage)
-                XCTAssertTrue(viewModel.hasError, "正常にエラーを表示できること")
+                XCTAssertTrue(viewModel.hasError, "must have error")
                 
                 expectation.fulfill()
 
