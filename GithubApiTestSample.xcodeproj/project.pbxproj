@@ -23,6 +23,8 @@
 		A829CF1226B7B13D00B9266F /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = A829CF1126B7B13D00B9266F /* NukeUI */; };
 		A89D26CD26B3B73F0030C4EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CC26B3B73F0030C4EC /* ViewModel.swift */; };
 		A89D26CF26B3C86F0030C4EC /* StubApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */; };
+		A8D2F35B26B7D8130092F3F6 /* View+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D2F35A26B7D8130092F3F6 /* View+Snapshot.swift */; };
+		A8E85CC726B8B86F00065CA2 /* XCTAttachment+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E85CC626B8B86F00065CA2 /* XCTAttachment+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		A829CF0E26B7AC9400B9266F /* RepositoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRow.swift; sourceTree = "<group>"; };
 		A89D26CC26B3B73F0030C4EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubApiClient.swift; sourceTree = "<group>"; };
+		A8D2F35A26B7D8130092F3F6 /* View+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Snapshot.swift"; sourceTree = "<group>"; };
+		A8E85CC626B8B86F00065CA2 /* XCTAttachment+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAttachment+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 			children = (
 				A81D49C826B223F200122C4B /* GithubApiTestSampleTests.swift */,
 				A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */,
+				A8D2F35A26B7D8130092F3F6 /* View+Snapshot.swift */,
+				A8E85CC626B8B86F00065CA2 /* XCTAttachment+.swift */,
 				A81D49EA26B22B9B00122C4B /* Files */,
 				A81D49CA26B223F200122C4B /* Info.plist */,
 			);
@@ -324,6 +330,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A81D49C926B223F200122C4B /* GithubApiTestSampleTests.swift in Sources */,
+				A8D2F35B26B7D8130092F3F6 /* View+Snapshot.swift in Sources */,
+				A8E85CC726B8B86F00065CA2 /* XCTAttachment+.swift in Sources */,
 				A89D26CF26B3C86F0030C4EC /* StubApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

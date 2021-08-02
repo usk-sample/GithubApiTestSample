@@ -14,6 +14,8 @@ import ViewInspector
 
 @testable import GithubApiTestSample
 
+extension ContentView: Inspectable { }
+
 class GithubApiTestSampleTests: XCTestCase {
 
     private lazy var testBundle = Bundle.init(for: type(of: self))
@@ -207,11 +209,19 @@ class GithubApiTestSampleTests: XCTestCase {
     /// Test for View
     func testView() throws {
         
-        XCTContext.runActivity(named: "loading") { activity in
-            XCTAssertTrue(false, "must shown loading view")
+        try XCTContext.runActivity(named: "loading") { activity in
+            let viewModel = ViewModel()
+            viewModel.loading = true
+            let view = ContentView(viewModel: viewModel)
+                                
+            add(XCTAttachment(image: view.snapshot()).setLifetime(.keepAlways))
+            
+            XCTAssertNoThrow(try view.inspect().vStack().group(2).progressView(0), "must have loading view")
+            
         }
         
         XCTContext.runActivity(named: "has result") { activity in
+            
             XCTAssertTrue(false, "must have result")
         }
         
