@@ -134,19 +134,49 @@ class GithubApiTestSampleTests: XCTestCase {
 
     func testSearchViewModel() throws {
         
+        guard let url = testBundle.url(forResource: "search_repositories", withExtension: "json"),
+              let data = try? Data.init(contentsOf: url) else {
+            XCTFail("json file not found")
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+                
         XCTContext.runActivity(named: "success") { activity in
             let expectation = expectation(description: activity.name)
+        
+            let viewModel = ViewModel.init(apiClient: StubApiClient(response: response, failure: false))
+                        
+            viewModel.search(query: "apple", debounce: 0.5)
             
-            XCTAssertTrue(false, "正常にデータを取得できること")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                debugPrint(viewModel.items)
+                XCTAssertTrue(!viewModel.items.isEmpty, "正常にデータを取得できること")
+                expectation.fulfill()
+            }
+            
             
             wait(for: [expectation], timeout: 5.0)
         }
         
         XCTContext.runActivity(named: "failure") { activity in
             let expectation = expectation(description: activity.name)
-            
-            XCTAssertTrue(false, "正常にエラーを表示できること")
 
+            let viewModel = ViewModel.init(apiClient: StubApiClient(response: response, failure: true))
+
+            viewModel.search(query: "apple", debounce: 0.5)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                debugPrint(viewModel.errorMessage)
+                XCTAssertTrue(viewModel.hasError, "正常にエラーを表示できること")
+                
+                expectation.fulfill()
+
+            }
+            
             wait(for: [expectation], timeout: 5.0)
         }
                 

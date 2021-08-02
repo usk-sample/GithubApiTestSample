@@ -28,13 +28,13 @@ class ViewModel: NSObject, ObservableObject {
 
 extension ViewModel {
     
-    func search(query: String) {
+    func search(query: String, debounce: TimeInterval = 3.0) {
         
         self.loading = true
         
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         
-        perform(#selector(doSearch(query:)), with: query, afterDelay: 3.0)
+        perform(#selector(doSearch(query:)), with: query, afterDelay: debounce)
         
     }
     
@@ -53,6 +53,7 @@ private extension ViewModel {
                 case .finished:
                     self?.hasError = false
                 case .failure(let error):
+                    debugPrint("*** error")
                     debugPrint(error)
                     self?.hasError = true
                     self?.errorMessage = error.localizedDescription
