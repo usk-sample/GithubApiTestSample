@@ -9,6 +9,11 @@ import Foundation
 
 import Combine
 
+enum HTTPError: Error {
+    case transportError(Error)
+    case serverSideError(Int)
+}
+
 protocol ApiClientProtocol: AnyObject {
     func searchRepositories(query: String) -> AnyPublisher<SearchRepositoryResponse, Error>
 }
@@ -46,11 +51,14 @@ extension URLSession.DataTaskPublisher {
     public func validateNetwork() -> Publishers.TryMap<Self, Data> {
         
         return tryMap() { element -> Data in
-            guard let httpResponse = element.response as? HTTPURLResponse,
-                httpResponse.statusCode == 200 else {
-                debugPrint(element.response)
-                    throw URLError(.badServerResponse)
-                }
+            guard let httpResponse = element.response as? HTTPURLResponse else {
+                throw HTTPError.transportError(URLError(.badServerResponse))
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                throw HTTPError.serverSideError(httpResponse.statusCode)
+            }
+            
             return element.data
         }
         

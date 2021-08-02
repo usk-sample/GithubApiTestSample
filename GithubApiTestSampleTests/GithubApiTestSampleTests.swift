@@ -134,31 +134,29 @@ class GithubApiTestSampleTests: XCTestCase {
         
         let apiClient = ApiClient()
         
-        measure {
-            XCTContext.runActivity(named: "search apple") { activity in
-                let expectation = expectation(description: activity.name)
-                
-                apiClient.searchRepositories(query: "apple swift format")
-                    .sink { completion in
-                        switch completion {
+        XCTContext.runActivity(named: "search apple") { activity in
+            let expectation = expectation(description: activity.name)
+            
+            apiClient.searchRepositories(query: "apple swift format")
+                .sink { completion in
+                    switch completion {
 
-                        case .finished:
-                            debugPrint("finished")
+                    case .finished:
+                        debugPrint("finished")
 
-                        case .failure(let error):
-                            debugPrint(error)
-                            XCTFail(error.localizedDescription)
-                        }
-                        
-                        expectation.fulfill()
-                        
-                    } receiveValue: { received in
-                        debugPrint(received.items.count)
-                    }.store(in: &cancellations)
-                
-                wait(for: [expectation], timeout: 5.0)
-                
-            }
+                    case .failure(let error):
+                        debugPrint(error)
+                        XCTFail(error.localizedDescription)
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } receiveValue: { received in
+                    debugPrint(received.items.count)
+                }.store(in: &cancellations)
+            
+            wait(for: [expectation], timeout: 5.0)
+            
         }
         
     }
