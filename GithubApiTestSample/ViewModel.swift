@@ -16,6 +16,7 @@ class ViewModel: NSObject, ObservableObject {
         self.apiClient = apiClient
     }
     
+    @Published var text: String = ""
     @Published var loading: Bool = false
     @Published var items: [SearchRepositoryItem] = []
     @Published var hasNext: Bool = false
@@ -28,13 +29,13 @@ class ViewModel: NSObject, ObservableObject {
 
 extension ViewModel {
     
-    func search(query: String, debounce: TimeInterval = 3.0) {
+    func search(debounce: TimeInterval = 3.0) {
         
         self.loading = true
         
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         
-        perform(#selector(doSearch(query:)), with: query, afterDelay: debounce)
+        perform(#selector(doSearch), with: nil, afterDelay: debounce)
         
     }
     
@@ -42,11 +43,11 @@ extension ViewModel {
 
 private extension ViewModel {
     
-    @objc func doSearch(query: String) {
+    @objc func doSearch() {
         
-        debugPrint("doSearch:\(query)")
+        debugPrint("doSearch:\(text)")
         
-        apiClient.searchRepositories(query: query)
+        apiClient.searchRepositories(query: text)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 self?.loading = false

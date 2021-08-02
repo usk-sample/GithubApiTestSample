@@ -10,16 +10,15 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var viewModel: ViewModel
-    @State var text: String = ""
     
     var body: some View {
 
         VStack {
             
-            TextField.init("search respository", text: $text) { _ in
+            TextField.init("search respository", text: $viewModel.text) { _ in
             } onCommit: {
-                if !text.isEmpty {
-                    self.viewModel.search(query: text)
+                if !viewModel.text.isEmpty {
+                    self.viewModel.search()
                 }
             }
             .padding(4)

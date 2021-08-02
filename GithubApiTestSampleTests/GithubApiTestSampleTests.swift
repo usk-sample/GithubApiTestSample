@@ -173,8 +173,8 @@ class GithubApiTestSampleTests: XCTestCase {
             let expectation = expectation(description: activity.name)
         
             let viewModel = ViewModel.init(apiClient: StubApiClient(response: response, failure: false))
-                        
-            viewModel.search(query: "apple", debounce: 0.5)
+            viewModel.text = "apple"
+            viewModel.search(debounce: 0.5)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 debugPrint(viewModel.items)
@@ -190,8 +190,8 @@ class GithubApiTestSampleTests: XCTestCase {
             let expectation = expectation(description: activity.name)
 
             let viewModel = ViewModel.init(apiClient: StubApiClient(response: response, failure: true))
-
-            viewModel.search(query: "apple", debounce: 0.5)
+            viewModel.text = "apple"
+            viewModel.search(debounce: 0.5)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 debugPrint(viewModel.errorMessage)
