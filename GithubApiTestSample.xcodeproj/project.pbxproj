@@ -18,6 +18,7 @@
 		A81D49EC26B22BBD00122C4B /* search_repositories.json in Resources */ = {isa = PBXBuildFile; fileRef = A81D49EB26B22BBD00122C4B /* search_repositories.json */; };
 		A81D49EE26B2300D00122C4B /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81D49ED26B2300D00122C4B /* ApiClient.swift */; };
 		A81D49F126B23A6100122C4B /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A81D49F026B23A6100122C4B /* OHHTTPStubsSwift */; };
+		A829CF0D26B7A74000B9266F /* search_repositories_apple.json in Resources */ = {isa = PBXBuildFile; fileRef = A829CF0C26B7A74000B9266F /* search_repositories_apple.json */; };
 		A89D26CD26B3B73F0030C4EC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CC26B3B73F0030C4EC /* ViewModel.swift */; };
 		A89D26CF26B3C86F0030C4EC /* StubApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		A81D49E826B228CC00122C4B /* SearchRepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryResponse.swift; sourceTree = "<group>"; };
 		A81D49EB26B22BBD00122C4B /* search_repositories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_repositories.json; sourceTree = "<group>"; };
 		A81D49ED26B2300D00122C4B /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		A829CF0C26B7A74000B9266F /* search_repositories_apple.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search_repositories_apple.json; sourceTree = "<group>"; };
 		A89D26CC26B3B73F0030C4EC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A89D26CE26B3C86F0030C4EC /* StubApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubApiClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				A81D49EB26B22BBD00122C4B /* search_repositories.json */,
+				A829CF0C26B7A74000B9266F /* search_repositories_apple.json */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A829CF0D26B7A74000B9266F /* search_repositories_apple.json in Resources */,
 				A81D49EC26B22BBD00122C4B /* search_repositories.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,8 +29,9 @@ class ApiClient {
 extension ApiClient: ApiClientProtocol {
     
     func searchRepositories(query: String) -> AnyPublisher<SearchRepositoryResponse, Error> {
-        let url = URL(string: baseUrl + "/search/repositories")!
+        let url = URL(string: baseUrl + "/search/repositories?q=\(query)")!
         let request = URLRequest(url: url)
+        debugPrint(url.absoluteString)
         return session
             .dataTaskPublisher(for: request)
             .validateNetwork()

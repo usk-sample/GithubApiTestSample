@@ -138,8 +138,32 @@ class GithubApiTestSampleTests: XCTestCase {
     
     /// Text using Github API
     func testGithubApi() throws {
+        
+        let apiClient = ApiClient()
+        
         XCTContext.runActivity(named: "search apple") { activity in
-            XCTAssertTrue(false, "must have response")
+            let expectation = expectation(description: activity.name)
+            
+            apiClient.searchRepositories(query: "apple")
+                .sink { completion in
+                    switch completion {
+
+                    case .finished:
+                        debugPrint("finished")
+
+                    case .failure(let error):
+                        debugPrint(error)
+                        XCTFail(error.localizedDescription)
+                    }
+                    
+                    expectation.fulfill()
+                    
+                } receiveValue: { received in
+                    debugPrint(received)
+                }.store(in: &cancellations)
+            
+            wait(for: [expectation], timeout: 5.0)
+            
         }
     }
     
