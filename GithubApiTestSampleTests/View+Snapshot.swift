@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     
-    func snapshot(targetSize: CGSize = .init(width: 320, height: 480)) -> UIImage {
+    func snapshot(targetSize: CGSize = .init(width: 390, height: 844)) -> UIImage {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
 

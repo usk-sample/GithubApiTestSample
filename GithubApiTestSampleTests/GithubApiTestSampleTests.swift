@@ -220,13 +220,32 @@ class GithubApiTestSampleTests: XCTestCase {
             
         }
         
-        XCTContext.runActivity(named: "has result") { activity in
+        try XCTContext.runActivity(named: "has result") { activity in
             
-            XCTAssertTrue(false, "must have result")
+            let data = try getData(fileName: "search_repositories_apple")
+            let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+            
+            let viewModel = ViewModel()
+            viewModel.items = response.items
+            let view = ContentView(viewModel: viewModel)
+            
+            add(XCTAttachment(image: view.snapshot()).setLifetime(.keepAlways))
+
+            XCTAssertNoThrow(try view.inspect().vStack().group(2).list(0), "must have list view")
+            
         }
         
-        XCTContext.runActivity(named: "has error") { activity in
-            XCTAssertTrue(false, "must have error")
+        try XCTContext.runActivity(named: "has error") { activity in
+            
+            let viewModel = ViewModel()
+            viewModel.hasError = true
+            viewModel.errorMessage = "Operation Error\nOperation Error"
+            let view = ContentView(viewModel: viewModel)
+            
+            add(XCTAttachment(image: view.snapshot()).setLifetime(.keepAlways))
+
+            XCTAssertNoThrow(try view.inspect().vStack().group(2).vStack(0).image(0), "must have error view")
+            
         }
         
     }
