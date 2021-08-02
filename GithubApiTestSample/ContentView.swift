@@ -39,10 +39,7 @@ struct ContentView: View {
                     //show list
                     List {
                         ForEach.init(viewModel.items) { item in
-                            VStack {
-                                Text(item.name)
-                                Text(item.owner.login)
-                            }
+                            RepositoryRow(item: item)
                         }
                     }.frame(maxHeight: .infinity)
                     
