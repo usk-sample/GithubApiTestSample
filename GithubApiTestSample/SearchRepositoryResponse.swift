@@ -20,17 +20,17 @@ struct SearchRepositoryItem: Codable {
     let fullName: String
     let owner: GithubUser
     let `private`: Bool
-    let description: String
+    let description: String?
     let fork: Bool
     let url: String
     let createdAt: Date
     let updatedAt: Date
-    let homepage: String
+    let homepage: String?
     let stargazersCount: Int
     let watchersCount: Int
-    let language: String
+    let language: String?
     let forksCount: Int
-    let license: GithubLicense
+    let license: GithubLicense?
 }
 
 struct GithubUser: Codable {
@@ -45,5 +45,5 @@ struct GithubUser: Codable {
 struct GithubLicense: Codable {
     let key: String
     let name: String
-    let url: String
+    let url: String?
 }

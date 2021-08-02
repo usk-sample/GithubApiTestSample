@@ -36,12 +36,16 @@ class GithubApiTestSampleTests: XCTestCase {
     /// Test for Model of Response
     func testModel() throws {
         
-        let data = try getData(fileName: "search_repositories")
-        let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+        var data = try getData(fileName: "search_repositories")
+        var response = try decoder.decode(SearchRepositoryResponse.self, from: data)
         
         XCTAssertTrue(response.totalCount == 40, "invalid total count")
-        XCTAssertTrue(response.items.first?.license.key == "mit", "invalid License")
-                        
+        XCTAssertTrue(response.items.first?.license?.key == "mit", "invalid License")
+        
+        data = try getData(fileName: "search_repositories_apple")
+        response = try decoder.decode(SearchRepositoryResponse.self, from: data)
+        debugPrint(response.totalCount)
+        
     }
     
     /// Test for API using HTTPStubs
