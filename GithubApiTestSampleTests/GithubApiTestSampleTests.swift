@@ -138,7 +138,7 @@ class GithubApiTestSampleTests: XCTestCase {
             XCTContext.runActivity(named: "search apple") { activity in
                 let expectation = expectation(description: activity.name)
                 
-                apiClient.searchRepositories(query: "apple")
+                apiClient.searchRepositories(query: "apple swift format")
                     .sink { completion in
                         switch completion {
 
@@ -153,7 +153,7 @@ class GithubApiTestSampleTests: XCTestCase {
                         expectation.fulfill()
                         
                     } receiveValue: { received in
-                        debugPrint(received.items.first ?? "null")
+                        debugPrint(received.items.count)
                     }.store(in: &cancellations)
                 
                 wait(for: [expectation], timeout: 5.0)

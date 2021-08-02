@@ -29,7 +29,8 @@ class ApiClient {
 extension ApiClient: ApiClientProtocol {
     
     func searchRepositories(query: String) -> AnyPublisher<SearchRepositoryResponse, Error> {
-        let url = URL(string: baseUrl + "/search/repositories?q=\(query)")!
+        let queryString = query.replacingOccurrences(of: " ", with: "+")
+        let url = URL(string: baseUrl + "/search/repositories?q=\(queryString)")!
         let request = URLRequest(url: url)
         debugPrint(url.absoluteString)
         return session
@@ -47,6 +48,7 @@ extension URLSession.DataTaskPublisher {
         return tryMap() { element -> Data in
             guard let httpResponse = element.response as? HTTPURLResponse,
                 httpResponse.statusCode == 200 else {
+                debugPrint(element.response)
                     throw URLError(.badServerResponse)
                 }
             return element.data
