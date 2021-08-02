@@ -136,6 +136,13 @@ class GithubApiTestSampleTests: XCTestCase {
         
     }
     
+    /// Text using Github API
+    func testGithubApi() throws {
+        XCTContext.runActivity(named: "search apple") { activity in
+            XCTAssertTrue(false, "must have response")
+        }
+    }
+    
     /// Test for ViewModel
     func testSearchViewModel() throws {
         
