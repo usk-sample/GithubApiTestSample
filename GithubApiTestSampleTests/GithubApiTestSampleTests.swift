@@ -18,6 +18,12 @@ class GithubApiTestSampleTests: XCTestCase {
 
     private lazy var testBundle = Bundle.init(for: type(of: self))
     private var cancellations = Set<AnyCancellable>()
+    private var decoder: JSONDecoder = {
+        let dec = JSONDecoder()
+        dec.keyDecodingStrategy = .convertFromSnakeCase
+        dec.dateDecodingStrategy = .iso8601
+        return dec
+    }()
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -27,6 +33,7 @@ class GithubApiTestSampleTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    /// Test for Model of Response
     func testModel() throws {
         
         guard let url = testBundle.url(forResource: "search_repositories", withExtension: "json"),
@@ -34,11 +41,7 @@ class GithubApiTestSampleTests: XCTestCase {
             XCTFail("json file not found")
             return
         }
-        
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
-        
+                
         do {
             let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
             
@@ -52,6 +55,7 @@ class GithubApiTestSampleTests: XCTestCase {
                 
     }
     
+    /// Test for API using HTTPStubs
     func testStubApi() throws {
         
         let apiClient = ApiClient()
@@ -131,7 +135,8 @@ class GithubApiTestSampleTests: XCTestCase {
         }
         
     }
-
+    
+    /// Test for ViewModel
     func testSearchViewModel() throws {
         
         guard let url = testBundle.url(forResource: "search_repositories", withExtension: "json"),
@@ -140,9 +145,6 @@ class GithubApiTestSampleTests: XCTestCase {
             return
         }
         
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        decoder.dateDecodingStrategy = .iso8601
         let response = try decoder.decode(SearchRepositoryResponse.self, from: data)
                 
         XCTContext.runActivity(named: "success") { activity in
