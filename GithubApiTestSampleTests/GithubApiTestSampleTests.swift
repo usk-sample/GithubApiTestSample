@@ -39,6 +39,12 @@ class GithubApiTestSampleTests: XCTestCase {
     func testModel() throws {
         
         var data = try getData(fileName: "search_repositories")
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
+        
+        XCTAssertNoThrow(try decoder.decode(SearchRepositoryResponse.self, from: data), "can not decode")
         var response = try decoder.decode(SearchRepositoryResponse.self, from: data)
         
         XCTAssertTrue(response.totalCount == 40, "invalid total count")
